@@ -40,14 +40,19 @@ class MoneyTransferTest {
         DataHelper.CardInfo firstCardInfo = DataHelper.getFirstCardInfo();
         var secondCardInfo = DataHelper.getSecondCardInfo();
         int startBalanceSecond = dashboardPage.getCardBalance(secondCardInfo);
+        int startBalanceFirst = dashboardPage.getCardBalance(firstCardInfo);
 
         var transferPage = dashboardPage.selectCard(firstCardInfo);
         int amount = DataHelper.generateInvalidAmount(startBalanceSecond);
         dashboardPage = transferPage.makeTransfer(String.valueOf(amount), secondCardInfo);
 
         int actualBalanceSecond = dashboardPage.getCardBalance(secondCardInfo);
+        int actualBalanceFirst = dashboardPage.getCardBalance(firstCardInfo);
 
-        assertEquals(startBalanceSecond, actualBalanceSecond, "Баланс карты изменился!");
+
+        assertEquals(startBalanceSecond, actualBalanceSecond, "Баланс карты 2 изменился!");
+        assertEquals(startBalanceFirst, actualBalanceFirst, "Баланс карты 1 изменился!");
+
     }
 
 

@@ -23,12 +23,13 @@ public class DataHelper {
         return new CardInfo("0f3f5c2a-249e-4c3d-8287-09f7a039391d", "5559 0000 0000 0002");
     }
     public static int generateValidAmount(int balance) {
-        if (balance <= 0) return 0;
+        int absBalance = Math.abs(balance);
+        if (absBalance == 0) return 1;
         var random = new java.util.Random();
-        return random.nextInt(balance) + 1;
+        return random.nextInt(absBalance) + 1;
     }
     public static int generateInvalidAmount(int balance) {
-        return balance + 100;
+        return Math.abs(balance) + 100;
     }
 
     @Value
